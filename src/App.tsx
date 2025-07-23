@@ -12,8 +12,15 @@ import ImportantDates from "./pages/ImportantDates";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import AuthPage from "./pages/AuthPage";
-import ForgotPassword from "./pages/ForgotPassword"; // Import ForgotPassword
-import ResetPassword from "./pages/ResetPassword"; // Import ResetPassword
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import DashboardLayout from "./pages/DashboardLayout";
+import Formulir from "./pages/dashboard/Formulir";
+import Berkas from "./pages/dashboard/Berkas";
+import Finalisasi from "./pages/dashboard/Finalisasi";
+import Pembayaran from "./pages/dashboard/Pembayaran";
+import Kartu from "./pages/dashboard/Kartu";
+import Hasil from "./pages/dashboard/Hasil";
 
 const queryClient = new QueryClient();
 
@@ -31,11 +38,20 @@ const App = () => (
             <Route path="jadwal" element={<ImportantDates />} />
             <Route path="faq" element={<FAQ />} />
             <Route path="kontak" element={<Contact />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           </Route>
           <Route path="/login" element={<AuthPage />} />
-          <Route path="/lupa-password" element={<ForgotPassword />} /> {/* Add ForgotPassword route */}
-          <Route path="/reset-password" element={<ResetPassword />} /> {/* Add ResetPassword route */}
+          <Route path="/lupa-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route path="formulir" element={<Formulir />} />
+            <Route path="berkas" element={<Berkas />} />
+            <Route path="finalisasi" element={<Finalisasi />} />
+            <Route path="pembayaran" element={<Pembayaran />} />
+            <Route path="kartu" element={<Kartu />} />
+            <Route path="hasil" element={<Hasil />} />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
