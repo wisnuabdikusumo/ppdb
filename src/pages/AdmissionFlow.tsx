@@ -2,71 +2,66 @@
 
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, FileText, Upload, DollarSign, Printer, Award } from "lucide-react";
+import { CheckCircle, FileText, Upload, DollarSign, Printer, Award, UserPlus } from "lucide-react";
 
 const AdmissionFlow = () => {
   const steps = [
-    {
-      icon: <FileText className="h-8 w-8 text-primary" />,
-      title: "1. Pendaftaran Akun",
-      description: "Buat akun pendaftar menggunakan email atau NISN yang valid dan lakukan verifikasi email.",
-    },
-    {
-      icon: <FileText className="h-8 w-8 text-primary" />,
-      title: "2. Pengisian Formulir",
-      description: "Lengkapi data diri, data orang tua/wali, data asal sekolah, pilihan jurusan, nilai rapor, dan prestasi (jika ada).",
-    },
-    {
-      icon: <Upload className="h-8 w-8 text-primary" />,
-      title: "3. Unggah Berkas",
-      description: "Unggah dokumen yang diperlukan seperti KK, Akta Kelahiran, Ijazah/SKL, Pas Foto, Rapor, dan Sertifikat Prestasi.",
-    },
-    {
-      icon: <CheckCircle className="h-8 w-8 text-primary" />,
-      title: "4. Konfirmasi & Finalisasi",
-      description: "Periksa kembali semua data yang telah diisi. Pastikan tidak ada kesalahan sebelum mengunci data.",
-    },
-    {
-      icon: <DollarSign className="h-8 w-8 text-primary" />,
-      title: "5. Pembayaran Pendaftaran",
-      description: "Lakukan pembayaran biaya pendaftaran melalui metode yang tersedia (jika diperlukan).",
-    },
-    {
-      icon: <Printer className="h-8 w-8 text-primary" />,
-      title: "6. Cetak Kartu Peserta",
-      description: "Setelah finalisasi, unduh dan cetak Kartu Tanda Peserta Ujian/Seleksi.",
-    },
-    {
-      icon: <Award className="h-8 w-8 text-primary" />,
-      title: "7. Pengumuman Hasil",
-      description: "Cek status kelulusan Anda pada tanggal yang telah ditentukan.",
-    },
-    {
-      icon: <CheckCircle className="h-8 w-8 text-primary" />,
-      title: "8. Daftar Ulang Online",
-      description: "Bagi yang lulus, lakukan konfirmasi kesediaan dan unggah berkas tambahan untuk daftar ulang.",
-    },
+    { icon: <UserPlus />, title: "Pendaftaran Akun", description: "Buat akun pendaftar menggunakan email atau NISN yang valid." },
+    { icon: <FileText />, title: "Pengisian Formulir", description: "Lengkapi data diri, orang tua, asal sekolah, dan pilihan jurusan." },
+    { icon: <Upload />, title: "Unggah Berkas", description: "Unggah dokumen seperti KK, Akta, Ijazah/SKL, dan Pas Foto." },
+    { icon: <CheckCircle />, title: "Finalisasi Data", description: "Periksa kembali semua data dan kunci data jika sudah benar." },
+    { icon: <DollarSign />, title: "Pembayaran Pendaftaran", description: "Lakukan pembayaran biaya pendaftaran melalui metode yang tersedia." },
+    { icon: <Printer />, title: "Cetak Kartu Peserta", description: "Unduh dan cetak Kartu Tanda Peserta Ujian/Seleksi." },
+    { icon: <Award />, title: "Pengumuman Hasil", description: "Cek status kelulusan Anda pada tanggal yang ditentukan." },
+    { icon: <CheckCircle />, title: "Daftar Ulang", description: "Bagi yang lulus, lakukan konfirmasi dan unggah berkas daftar ulang." },
   ];
 
   return (
     <div className="container mx-auto px-4 py-8 md:py-12">
-      <h1 className="text-4xl font-bold text-center mb-8">Alur Pendaftaran Siswa Baru</h1>
-      <p className="text-lg text-center text-muted-foreground mb-10 max-w-3xl mx-auto">
-        Ikuti langkah-langkah mudah di bawah ini untuk menyelesaikan proses pendaftaran Anda.
-      </p>
+      <div className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">Alur Pendaftaran Siswa Baru</h1>
+        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          Ikuti langkah-langkah mudah di bawah ini untuk menyelesaikan proses pendaftaran Anda.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {steps.map((step, index) => (
-          <Card key={index} className="flex flex-col items-center text-center p-6">
-            <div className="mb-4">{step.icon}</div>
-            <CardHeader className="p-0 pb-2">
-              <CardTitle className="text-xl">{step.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              <p className="text-muted-foreground">{step.description}</p>
-            </CardContent>
-          </Card>
-        ))}
+      <div className="relative">
+        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 hidden md:block"></div>
+        <div className="space-y-12">
+          {steps.map((step, index) => (
+            <div key={index} className="relative md:flex items-center md:w-full">
+              <div className="md:w-1/2 md:pr-8 md:text-right">
+                {index % 2 === 0 && (
+                  <Card className="p-6 hover:shadow-lg transition-shadow">
+                    <CardTitle className="mb-2">{step.title}</CardTitle>
+                    <p className="text-muted-foreground">{step.description}</p>
+                  </Card>
+                )}
+              </div>
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background p-2 rounded-full border-2 border-primary hidden md:block">
+                <div className="h-8 w-8 text-primary flex items-center justify-center">{step.icon}</div>
+              </div>
+              <div className="md:w-1/2 md:pl-8">
+                {index % 2 !== 0 && (
+                  <Card className="p-6 hover:shadow-lg transition-shadow">
+                    <CardTitle className="mb-2">{step.title}</CardTitle>
+                    <p className="text-muted-foreground">{step.description}</p>
+                  </Card>
+                )}
+              </div>
+              {/* Mobile view card */}
+              <div className="md:hidden mt-4">
+                 <Card className="p-6 hover:shadow-lg transition-shadow flex items-center gap-4">
+                    <div className="text-primary">{step.icon}</div>
+                    <div>
+                      <CardTitle className="mb-1 text-lg">{step.title}</CardTitle>
+                      <p className="text-muted-foreground text-sm">{step.description}</p>
+                    </div>
+                  </Card>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

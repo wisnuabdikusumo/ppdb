@@ -2,15 +2,20 @@
 
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Target, CheckCircle, Building, Award } from "lucide-react";
 
 const SchoolProfile = () => {
   return (
-    <div className="container mx-auto px-4 py-8 md:py-12">
-      <h1 className="text-4xl font-bold text-center mb-8">Profil Sekolah</h1>
+    <div className="container mx-auto px-4 py-8 md:py-12 bg-gray-50/50">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">Profil SMK Unitomo Surabaya</h1>
+        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Mengenal lebih dekat tentang visi, misi, sejarah, dan fasilitas unggulan kami.</p>
+      </div>
 
-      <section className="mb-10">
-        <Card>
-          <CardHeader>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader className="flex flex-row items-center gap-4">
+            <Target className="h-10 w-10 text-primary" />
             <CardTitle className="text-2xl">Visi</CardTitle>
           </CardHeader>
           <CardContent>
@@ -20,65 +25,55 @@ const SchoolProfile = () => {
             </p>
           </CardContent>
         </Card>
-      </section>
-
-      <section className="mb-10">
-        <Card>
-          <CardHeader>
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader className="flex flex-row items-center gap-4">
+            <Award className="h-10 w-10 text-primary" />
             <CardTitle className="text-2xl">Misi</CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="list-disc list-inside text-lg text-muted-foreground space-y-2">
-              <li>Menyelenggarakan pendidikan berkualitas yang berlandaskan nilai-nilai agama dan budaya.</li>
-              <li>Mengembangkan potensi akademik dan non-akademik siswa secara optimal.</li>
-              <li>Menciptakan lingkungan belajar yang kondusif, inspiratif, dan inklusif.</li>
-              <li>Membekali siswa dengan keterampilan abad 21 dan jiwa kepemimpinan.</li>
-              <li>Menjalin kerjasama yang harmonis dengan orang tua, masyarakat, dan industri.</li>
+              <li>Menyelenggarakan pendidikan berkualitas.</li>
+              <li>Mengembangkan potensi siswa secara optimal.</li>
+              <li>Menciptakan lingkungan belajar yang kondusif.</li>
             </ul>
           </CardContent>
         </Card>
-      </section>
+      </div>
 
-      <section className="mb-10">
-        <Card>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="text-2xl">Sejarah Singkat</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-lg text-muted-foreground">
-              SMA/SMK Unitomo Surabaya didirikan pada tahun [Tahun Didirikan]
+            <p className="text-muted-foreground leading-relaxed">
+              SMK Unitomo Surabaya didirikan pada tahun [Tahun Didirikan]
               dengan semangat untuk memberikan pendidikan terbaik bagi generasi
               muda. Sejak awal, kami berkomitmen untuk menciptakan lingkungan
               belajar yang inovatif dan mendukung perkembangan holistik siswa.
-              Berawal dari [jumlah] siswa dan [jumlah] guru, kini kami telah
-              berkembang menjadi salah satu sekolah terkemuka di wilayah ini,
-              dengan ribuan alumni yang tersebar di berbagai bidang profesi.
+              Kini kami telah berkembang menjadi salah satu sekolah terkemuka di wilayah ini.
             </p>
           </CardContent>
         </Card>
-      </section>
 
-      <section>
-        <Card>
+        <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="text-2xl">Fasilitas Sekolah</CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="list-disc list-inside text-lg text-muted-foreground space-y-2">
-              <li>Ruang Kelas Ber-AC dengan Proyektor Interaktif</li>
-              <li>Laboratorium Komputer Modern</li>
-              <li>Laboratorium IPA (Fisika, Kimia, Biologi)</li>
-              <li>Perpustakaan Digital dan Konvensional</li>
-              <li>Lapangan Olahraga (Basket, Futsal, Voli)</li>
-              <li>Aula Serbaguna</li>
-              <li>Kantin Sehat</li>
-              <li>Mushola/Masjid</li>
-              <li>Ruang UKS</li>
-              <li>Area Parkir Luas</li>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-muted-foreground">
+              <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Kelas Ber-AC</li>
+              <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Lab Komputer</li>
+              <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Lab IPA</li>
+              <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Perpustakaan</li>
+              <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Lapangan Olahraga</li>
+              <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Aula Serbaguna</li>
+              <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Kantin Sehat</li>
+              <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Mushola</li>
             </ul>
           </CardContent>
         </Card>
-      </section>
+      </div>
     </div>
   );
 };
