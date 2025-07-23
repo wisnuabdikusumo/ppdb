@@ -46,7 +46,7 @@ const SchoolProfile = () => {
           </CardHeader>
           <CardContent>
             <p className="text-lg text-muted-foreground">
-              SMA/SMK [Nama Sekolah Anda] didirikan pada tahun [Tahun Didirikan]
+              SMA/SMK Unitomo Surabaya didirikan pada tahun [Tahun Didirikan]
               dengan semangat untuk memberikan pendidikan terbaik bagi generasi
               muda. Sejak awal, kami berkomitmen untuk menciptakan lingkungan
               belajar yang inovatif dan mendukung perkembangan holistik siswa.
