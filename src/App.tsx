@@ -1,5 +1,4 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster as Sonner } from "@/components/ui/sonner"; // Hanya menggunakan Sonner dari sonner
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -12,15 +11,14 @@ import AdmissionFlow from "./pages/AdmissionFlow";
 import ImportantDates from "./pages/ImportantDates";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
-import AuthPage from "./pages/AuthPage"; // Import AuthPage
+import AuthPage from "./pages/AuthPage";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
+      <Sonner /> {/* Hanya menggunakan Sonner */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />}>
@@ -33,7 +31,7 @@ const App = () => (
             <Route path="kontak" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           </Route>
-          <Route path="/login" element={<AuthPage />} /> {/* Add AuthPage route */}
+          <Route path="/login" element={<AuthPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
