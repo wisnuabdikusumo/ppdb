@@ -32,7 +32,7 @@ const Navbar = () => {
     <div className="border-b bg-background">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-          PPDB SMA/SMK Unitomo Surabaya
+          PPDB SMK Unitomo Surabaya
         </Link>
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
