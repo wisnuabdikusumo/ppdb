@@ -61,8 +61,8 @@ const Homepage = () => {
             </p>
             <Button variant="link" className="mt-2 p-0" asChild>
               <Link to="/jurusan">Pelajari Jurusan</Link>
-            </CardContent>
-          </Card>
+            </Button>
+          </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
