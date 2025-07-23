@@ -11,22 +11,11 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/contexts/SessionContext";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
 import { LayoutDashboard } from "lucide-react";
 
 const Navbar = () => {
   const { session, loading } = useSession();
   const user = session?.user;
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      toast.error(`Logout gagal: ${error.message}`);
-    } else {
-      toast.success("Anda telah berhasil logout.");
-    }
-  };
 
   return (
     <div className="border-b bg-background">
@@ -43,7 +32,41 @@ const Navbar = () => {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            {/* Other nav items... */}
+            <NavigationMenuItem>
+              <Link to="/profil-sekolah">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Profil Sekolah
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/jurusan">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Jurusan
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/alur-pendaftaran">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Alur Pendaftaran
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/jadwal">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Jadwal
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/faq">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  FAQ
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
             <NavigationMenuItem>
               <Link to="/kontak">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -70,3 +93,6 @@ const Navbar = () => {
       </div>
     </div>
   );
+};
+
+export default Navbar;
