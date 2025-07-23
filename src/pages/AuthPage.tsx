@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { supabase } from "@/lib/supabase"; // Import Supabase client
+import { supabase } from "@/integrations/supabase/client"; // Import Supabase client
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");

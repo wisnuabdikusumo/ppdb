@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { Input } => "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { supabase } from "@/lib/supabase"; // Import Supabase client
+import { supabase } from "@/integrations/supabase/client"; // Import Supabase client
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
