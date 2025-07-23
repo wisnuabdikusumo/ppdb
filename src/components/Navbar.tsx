@@ -11,8 +11,23 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useSession } from "@/contexts/SessionContext";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Navbar = () => {
+  const { session, loading } = useSession();
+  const user = session?.user;
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error(`Logout gagal: ${error.message}`);
+    } else {
+      toast.success("Anda telah berhasil logout.");
+    }
+  };
+
   return (
     <div className="border-b bg-background">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
@@ -72,9 +87,15 @@ const Navbar = () => {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <Button asChild>
-          <Link to="/login">Daftar / Login</Link>
-        </Button>
+        {loading ? (
+          <div className="w-24 h-10 bg-gray-200 rounded-md animate-pulse"></div>
+        ) : user ? (
+          <Button onClick={handleLogout}>Logout</Button>
+        ) : (
+          <Button asChild>
+            <Link to="/login">Daftar / Login</Link>
+          </Button>
+        )}
       </div>
     </div>
   );

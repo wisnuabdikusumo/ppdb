@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -8,13 +8,22 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client"; // Import Supabase client
+import { supabase } from "@/integrations/supabase/client";
+import { useSession } from "@/contexts/SessionContext";
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const { session, loading } = useSession();
+
+  useEffect(() => {
+    if (!loading && session) {
+      navigate("/");
+      toast.info("Anda sudah login.");
+    }
+  }, [session, loading, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +36,6 @@ const AuthPage = () => {
       toast.error(`Login gagal: ${error.message}`);
     } else {
       toast.success("Login berhasil! Mengarahkan ke beranda...");
-      navigate("/"); // Redirect ke halaman utama setelah login berhasil
     }
   };
 
@@ -47,11 +55,21 @@ const AuthPage = () => {
       toast.error(`Pendaftaran gagal: ${error.message}`);
     } else if (data.user) {
       toast.success("Pendaftaran berhasil! Silakan cek email Anda untuk verifikasi.");
-      // Opsional: arahkan pengguna ke halaman verifikasi email atau beranda
     } else {
       toast.info("Pendaftaran berhasil, tetapi perlu verifikasi email. Silakan cek email Anda.");
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[calc(100vh-160px)] py-12">
+        <Card className="w-[400px] text-center p-6">
+          <CardTitle>Memuat...</CardTitle>
+          <CardDescription>Mohon tunggu sebentar.</CardDescription>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-160px)] py-12">

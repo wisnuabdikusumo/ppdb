@@ -5,21 +5,32 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CalendarDays, GraduationCap, Info } from "lucide-react";
+import { useSession } from "@/contexts/SessionContext";
 
 const Homepage = () => {
+  const { session, loading } = useSession();
+  const user = session?.user;
+
   return (
     <div className="container mx-auto px-4 py-8 md:py-12">
       <section className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
           Selamat Datang di PPDB Online SMA/SMK
         </h1>
+        {user && (
+          <p className="text-xl md:text-2xl font-semibold text-secondary-foreground mb-4">
+            Halo, {user.email}!
+          </p>
+        )}
         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
           Wujudkan masa depan cerahmu bersama kami! Daftarkan dirimu sekarang
           dan jadilah bagian dari keluarga besar sekolah kami.
         </p>
-        <Button size="lg" asChild>
-          <Link to="/login">Daftar Sekarang</Link>
-        </Button>
+        {!user && (
+          <Button size="lg" asChild>
+            <Link to="/login">Daftar Sekarang</Link>
+          </Button>
+        )}
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -50,8 +61,8 @@ const Homepage = () => {
             </p>
             <Button variant="link" className="mt-2 p-0" asChild>
               <Link to="/jurusan">Pelajari Jurusan</Link>
-            </Button>
-          </CardContent>
+            </CardContent>
+          </Card>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
