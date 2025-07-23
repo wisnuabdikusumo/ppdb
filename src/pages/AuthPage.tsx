@@ -1,35 +1,56 @@
 "use client";
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { toast } from "sonner"; // Menggunakan toast dari sonner
+import { toast } from "sonner";
+import { supabase } from "@/lib/supabase"; // Import Supabase client
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login attempted with:", { email, password });
-    toast.info("Fitur login memerlukan backend. Ini hanya simulasi.");
-    // Logika login akan diimplementasikan di sini dengan backend
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      toast.error(`Login gagal: ${error.message}`);
+    } else {
+      toast.success("Login berhasil! Mengarahkan ke beranda...");
+      navigate("/"); // Redirect ke halaman utama setelah login berhasil
+    }
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Password dan konfirmasi password tidak cocok!");
       return;
     }
-    console.log("Registration attempted with:", { email, password });
-    toast.info("Fitur pendaftaran memerlukan backend. Ini hanya simulasi.");
-    // Logika pendaftaran akan diimplementasikan di sini dengan backend
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      toast.error(`Pendaftaran gagal: ${error.message}`);
+    } else if (data.user) {
+      toast.success("Pendaftaran berhasil! Silakan cek email Anda untuk verifikasi.");
+      // Opsional: arahkan pengguna ke halaman verifikasi email atau beranda
+    } else {
+      toast.info("Pendaftaran berhasil, tetapi perlu verifikasi email. Silakan cek email Anda.");
+    }
   };
 
   return (
@@ -50,11 +71,11 @@ const AuthPage = () => {
             <CardContent className="space-y-4">
               <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email-login">Email atau NISN</Label>
+                  <Label htmlFor="email-login">Email</Label>
                   <Input
                     id="email-login"
-                    type="text"
-                    placeholder="Masukkan email atau NISN Anda"
+                    type="email"
+                    placeholder="Masukkan email Anda"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -64,7 +85,7 @@ const AuthPage = () => {
                   <div className="flex items-center">
                     <Label htmlFor="password-login">Password</Label>
                     <Link
-                      to="/lupa-password" // Rute ini perlu ditambahkan nanti
+                      to="/lupa-password"
                       className="ml-auto inline-block text-sm underline"
                     >
                       Lupa password?
