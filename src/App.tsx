@@ -12,6 +12,7 @@ import AdmissionFlow from "./pages/AdmissionFlow";
 import ImportantDates from "./pages/ImportantDates";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+import AuthPage from "./pages/AuthPage"; // Import AuthPage
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="kontak" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           </Route>
+          <Route path="/login" element={<AuthPage />} /> {/* Add AuthPage route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
